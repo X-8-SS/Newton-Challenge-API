@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using NewtonChallenge.DataAccessObjects.Entities;
 using NewtonChallenge.DataLayer;
 using NewtonChallenge.DataTransferObjects;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -26,6 +27,7 @@ namespace NewtonChallenge.BusinessLayer.VideoGameServices
             this._logger = logger;
         }
 
+        /// <inheritdoc />
         public async Task<List<VideoGamesDto>> GetAllVideoGamesAsync()
         {
             var videoGames = await _context.VideoGames.ToListAsync();
@@ -33,7 +35,7 @@ namespace NewtonChallenge.BusinessLayer.VideoGameServices
             var ratings = await _context.Ratings.ToListAsync();
 
             var videoGamesDto = _mapper.Map<List<VideoGamesDto>>(videoGames);
-
+            // construct the descriptions for genreId and ratingId
             foreach (var videoGame in videoGamesDto)
             {
                 videoGame.GenreName = genres.Find(x => x.GenreId == videoGame.GenreId)?.Name ?? string.Empty;
@@ -43,6 +45,7 @@ namespace NewtonChallenge.BusinessLayer.VideoGameServices
             return videoGamesDto;
         }
 
+        /// <inheritdoc />
         public async Task<VideoGameDto> GetVideoGameAsync(int id)
         {
             var videoGame = await _context.VideoGames.FindAsync(id);           
@@ -51,6 +54,7 @@ namespace NewtonChallenge.BusinessLayer.VideoGameServices
             return videoGameDto;
         }
 
+        /// <inheritdoc />
         public async Task<VideoGame> GetVideoGameDAOAsync(int id)
         {
             var videoGame = await _context.VideoGames.FindAsync(id);
@@ -58,10 +62,18 @@ namespace NewtonChallenge.BusinessLayer.VideoGameServices
             return videoGame;
         }
 
+        /// <inheritdoc />
         public async Task<bool> UpdateVideoGameAsync(VideoGame videoGame)
         {
-            _context.VideoGames.Update(videoGame);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.VideoGames.Update(videoGame);
+                await _context.SaveChangesAsync();
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError(ex.Message.ToString());
+            }            
 
             return true;
         }

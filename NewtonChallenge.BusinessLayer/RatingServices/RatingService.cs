@@ -23,6 +23,7 @@ namespace NewtonChallenge.BusinessLayer.RatingServices
             this._logger = logger;
         }
 
+        /// <inheritdoc />
         public async Task<List<RatingDto>> GetAllRatingAsync()
         {
             var ratings = await _context.Ratings.ToListAsync();

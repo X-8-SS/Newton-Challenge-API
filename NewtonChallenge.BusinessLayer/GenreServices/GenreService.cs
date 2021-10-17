@@ -23,6 +23,7 @@ namespace NewtonChallenge.BusinessLayer.GenreServices
             this._logger = logger;
         }
 
+        /// <inheritdoc />
         public async Task<List<GenreDto>> GetAllGenreAsync()
         {
             var genres = await _context.Genres.ToListAsync();

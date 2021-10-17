@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NewtonChallenge.BusinessLayer.GenreServices;
 using NewtonChallenge.BusinessLayer.VideoGameServices;
 using NewtonChallenge.DataTransferObjects;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace NewtonChallenge.RestAPI.Controllers.V1
@@ -55,14 +53,15 @@ namespace NewtonChallenge.RestAPI.Controllers.V1
         [HttpPut]
         public async Task<ActionResult> UpdateVideoGameAsync(VideoGameDto videoGame)
         {
-            
+            // first see if the id exists
+            // TODO: Model verification and logging into NLog - too tired now
             var existingVideoGame = await _videoGameService.GetVideoGameDAOAsync(videoGame.VideoGameId);
 
             if(existingVideoGame is null)
             {
-                return BadRequest("Cannot update a nont existing video game");
+                return BadRequest("Cannot update a non-existing video game");
             }
-
+            // I like to change the existing model.  Alternatively, this can be mapped also.
             existingVideoGame.Title = videoGame.Title;
             existingVideoGame.Price = videoGame.Price;
             existingVideoGame.ReleaseDate = videoGame.ReleaseDate;
