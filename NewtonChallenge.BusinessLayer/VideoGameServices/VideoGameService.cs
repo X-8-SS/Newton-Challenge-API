@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using NewtonChallenge.DataAccessObjects.Entities;
 using NewtonChallenge.DataLayer;
 using NewtonChallenge.DataTransferObjects;
 using System.Collections.Generic;
@@ -33,7 +34,7 @@ namespace NewtonChallenge.BusinessLayer.VideoGameServices
 
             var videoGamesDto = _mapper.Map<List<VideoGamesDto>>(videoGames);
 
-            foreach(var videoGame in videoGamesDto)
+            foreach (var videoGame in videoGamesDto)
             {
                 videoGame.GenreName = genres.Find(x => x.GenreId == videoGame.GenreId)?.Name ?? string.Empty;
                 videoGame.RatingCategory = ratings.Find(x => x.RatingId == videoGame.RatingId)?.Category ?? string.Empty;
@@ -48,6 +49,21 @@ namespace NewtonChallenge.BusinessLayer.VideoGameServices
             var videoGameDto = _mapper.Map<VideoGameDto>(videoGame);
 
             return videoGameDto;
+        }
+
+        public async Task<VideoGame> GetVideoGameDAOAsync(int id)
+        {
+            var videoGame = await _context.VideoGames.FindAsync(id);
+
+            return videoGame;
+        }
+
+        public async Task<bool> UpdateVideoGameAsync(VideoGame videoGame)
+        {
+            _context.VideoGames.Update(videoGame);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

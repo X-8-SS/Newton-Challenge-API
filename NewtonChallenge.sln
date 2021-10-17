@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewtonChallenge.DataAccessO
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewtonChallenge.DataTransferObjects", "NewtonChallenge.DataTransferObjects\NewtonChallenge.DataTransferObjects.csproj", "{B1985B00-36B1-435A-BAA0-CD30099E90FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewtonChallenge.IntegrationTest", "NewtonChallenge.IntegrationTest\NewtonChallenge.IntegrationTest.csproj", "{6D1F502C-BD6B-4720-872B-D1EC8EA646DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B1985B00-36B1-435A-BAA0-CD30099E90FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1985B00-36B1-435A-BAA0-CD30099E90FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1985B00-36B1-435A-BAA0-CD30099E90FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D1F502C-BD6B-4720-872B-D1EC8EA646DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D1F502C-BD6B-4720-872B-D1EC8EA646DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D1F502C-BD6B-4720-872B-D1EC8EA646DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D1F502C-BD6B-4720-872B-D1EC8EA646DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

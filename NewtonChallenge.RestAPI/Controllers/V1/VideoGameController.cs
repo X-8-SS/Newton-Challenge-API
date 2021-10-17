@@ -52,5 +52,27 @@ namespace NewtonChallenge.RestAPI.Controllers.V1
             }
         }
 
+        [HttpPut]
+        public async Task<ActionResult> UpdateVideoGameAsync(VideoGameDto videoGame)
+        {
+            
+            var existingVideoGame = await _videoGameService.GetVideoGameDAOAsync(videoGame.VideoGameId);
+
+            if(existingVideoGame is null)
+            {
+                return BadRequest("Cannot update a nont existing video game");
+            }
+
+            existingVideoGame.Title = videoGame.Title;
+            existingVideoGame.Price = videoGame.Price;
+            existingVideoGame.ReleaseDate = videoGame.ReleaseDate;
+            existingVideoGame.GenreId = videoGame.GenreId;
+            existingVideoGame.RatingId = videoGame.RatingId;
+
+            await _videoGameService.UpdateVideoGameAsync(existingVideoGame);
+
+            return Ok();
+        }
+
     }
 }
