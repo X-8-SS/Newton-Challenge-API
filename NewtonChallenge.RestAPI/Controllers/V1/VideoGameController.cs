@@ -68,9 +68,9 @@ namespace NewtonChallenge.RestAPI.Controllers.V1
             existingVideoGame.GenreId = videoGame.GenreId;
             existingVideoGame.RatingId = videoGame.RatingId;
 
-            await _videoGameService.UpdateVideoGameAsync(existingVideoGame);
+            var result = await _videoGameService.UpdateVideoGameAsync(existingVideoGame);
 
-            return Ok();
+            return Ok(result);
         }
 
     }

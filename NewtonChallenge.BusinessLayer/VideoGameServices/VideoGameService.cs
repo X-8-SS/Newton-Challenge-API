@@ -69,13 +69,16 @@ namespace NewtonChallenge.BusinessLayer.VideoGameServices
             {
                 _context.VideoGames.Update(videoGame);
                 await _context.SaveChangesAsync();
+
+                return true;
             }
             catch(Exception ex)
             {
                 _logger.LogError(ex.Message.ToString());
-            }            
 
-            return true;
+                return false;
+            } 
         }
+
     }
 }
